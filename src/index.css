@@ -5,9 +5,87 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: aliceblue;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.node {
+  width: 200px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: #fff;
+  margin: 5px 0;
+}
+.node-children {
+  padding-left: 25px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+  background: linear-gradient(
+    0deg,
+    rgb(56 53 105) 63%,
+    rgba(91, 135, 185, 1) 100%
+  );
+  color: #fff;
+}
+
+.title {
+  margin: 0 5px;
+}
+
+.title-children-amount {
+  opacity: 0.8;
+}
+
+.content {
+  padding: 10px;
+}
+
+.btn {
+  box-sizing: border-box;
+  border-style: none;
+  border-radius: 2px;
+  font-weight: 800;
+  padding: 3px 9px;
+  cursor: pointer;
+  transition: background 200ms;
+}
+
+.btn-add-child {
+  margin-top: 5px;
+  background: #e3e3e3;
+}
+
+.btn-remove {
+  margin: 2px;
+  background: #848daf;
+
+  /* color: #a3b2bb; */
+  color: #fff;
+}
+
+.btn-counter {
+  background: #438dd0;
+  color: #fff;
+  width: 30px;
+}
+
+.btn-remove:hover {
+  background: #ff3b3b;
+}
+
+.btn-counter:hover {
+  background: #0086ff;
+}
+
+.btn-add-child:hover {
+  background: #efefef;
 }
