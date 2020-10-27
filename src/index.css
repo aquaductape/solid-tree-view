@@ -5,7 +5,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: aliceblue;
+  background: #005197;
+}
+
+@-moz-document url-prefix() {
+  :focus,
+  button:focus,
+  button:-moz-focusring,
+  [type="button"]:-moz-focusring,
+  [type="reset"]:-moz-focusring,
+  [type="submit"]:-moz-focusring,
+  a:focus,
+  input:focus {
+    outline: 2px solid #000;
+    outline-offset: 1px;
+  }
 }
 
 code {
@@ -13,15 +27,34 @@ code {
     monospace;
 }
 
+.logo {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  filter: drop-shadow(5px 12px 10px #0b1d42);
+}
+
+.logo img {
+  display: block;
+  width: 50px;
+  transition: transform 500ms;
+}
+
+.logo:hover img {
+  transform: rotate(360deg);
+}
+
 .node {
   width: 200px;
-  border: 1px solid #000;
-  border-radius: 5px;
-  background: #fff;
   margin: 5px 0;
 }
 .node-children {
-  padding-left: 25px;
+  padding-left: 5px;
+}
+
+.navbar,
+.content {
+  border: 2px solid #242f41;
 }
 
 .navbar {
@@ -35,6 +68,10 @@ code {
     rgba(91, 135, 185, 1) 100%
   );
   color: #fff;
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  overflow: hidden;
 }
 
 .title {
@@ -47,6 +84,8 @@ code {
 
 .content {
   padding: 10px;
+  border-top: none;
+  background: #fff;
 }
 
 .btn {
@@ -88,4 +127,10 @@ code {
 
 .btn-add-child:hover {
   background: #efefef;
+}
+
+@media (min-width: 500px) {
+  .node-children {
+    padding-left: 25px;
+  }
 }
