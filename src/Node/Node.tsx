@@ -1,4 +1,4 @@
-import { For, useContext } from "solid-js";
+import { createMemo, For, useContext } from "solid-js";
 import { TreeContext, TTreeContext } from "../context/treeContext";
 import { getAllDescendants } from "./utils";
 
@@ -11,6 +11,9 @@ const Node = ({ id, parentId }: NodeProps) => {
   const [state, { createNode, decrement, deleteNode, increment }] = useContext(
     TreeContext
   ) as TTreeContext;
+  const getAllChildren = createMemo(
+    () => getAllDescendants(state.tree, id).length - 1
+  );
 
   const handleIncrementClick = () => increment(id);
 
@@ -23,7 +26,7 @@ const Node = ({ id, parentId }: NodeProps) => {
   };
 
   const renderChildrenCount = () => {
-    const children = getAllDescendants(state.tree, id).length - 1;
+    const children = getAllChildren();
 
     return children ? (
       <span className="title-children-amount"> | children: {children}</span>
@@ -32,7 +35,8 @@ const Node = ({ id, parentId }: NodeProps) => {
 
   const ariaDeleteLabel = () => {
     const label = `remove node of ID ${id}`;
-    const children = getAllDescendants(state.tree, id).length - 1;
+    const children = getAllChildren();
+
     if (!children) return label;
 
     return `${label} and its ${
