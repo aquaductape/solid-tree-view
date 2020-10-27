@@ -6,10 +6,8 @@ type TreeState = {
   tree: TTree;
   nextId: number;
 };
-export const TreeContext = createContext([{ tree: {}, nextId: 0 }, {}]);
 
-// creating context type since provider value isn't working
-export type TTreeContext = [
+type TTreeContext = [
   TreeState,
   {
     increment(id: number): void;
@@ -24,6 +22,11 @@ export type TTreeContext = [
     createNode(id: number): void;
   }
 ];
+
+export const TreeContext = createContext<TTreeContext>([
+  { tree: {}, nextId: 0 },
+  {} as any,
+]);
 
 export function TreeProvider(props: TreeState & { children: any }) {
   const [state, setState] = createState({
@@ -86,8 +89,6 @@ export function TreeProvider(props: TreeState & { children: any }) {
   ];
 
   return (
-    // ts error: store state child properties are undefined
-    // @ts-ignore
     <TreeContext.Provider value={store}>{props.children}</TreeContext.Provider>
   );
 }

@@ -34,6 +34,11 @@ code {
   filter: drop-shadow(5px 12px 10px #0b1d42);
 }
 
+.logo a {
+  display: block;
+  padding: 15px;
+}
+
 .logo img {
   display: block;
   width: 50px;
