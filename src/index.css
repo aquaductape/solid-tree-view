@@ -36,7 +36,7 @@ code {
 
 .logo a {
   display: block;
-  padding: 15px;
+  padding: 0px;
 }
 
 .logo img {
@@ -135,6 +135,9 @@ code {
 }
 
 @media (min-width: 500px) {
+  .logo a {
+    padding: 15px;
+  }
   .node-children {
     padding-left: 25px;
   }
