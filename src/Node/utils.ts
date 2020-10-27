@@ -10,7 +10,6 @@ export const getAllDescendants = (tree: TTree, id: number) => {
   };
 
   run(id);
-  console.log("run");
   return descendants;
 };
 
