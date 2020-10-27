@@ -61,7 +61,6 @@ const Node = ({ id, parentId }: NodeProps) => {
         )}
       </nav>
       <section className="content">
-        {/* is there any way to set up a getter where you can pass a parameter such as id. */}
         Counter: {state.tree[id].counter}{" "}
         <button
           className="btn btn-counter"
