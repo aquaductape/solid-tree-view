@@ -10,7 +10,7 @@ function App() {
     <div class="App">
       <div className="logo">
         <a href="https://github.com/ryansolid/solid" target="blank">
-          <img src="/solid-logo.png" alt="solid js logo" />
+          <img src="/solid-logo.png" alt="Solid JS" />
         </a>
       </div>
       <TreeProvider tree={tree} nextId={idCount}>
