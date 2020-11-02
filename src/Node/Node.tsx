@@ -58,7 +58,7 @@ const Node = ({ id, parentId }: NodeProps) => {
   return (
     <section className="node">
       <div className="title-bar">
-        <div className="title" aria-label={hiddenTitleForAria()}>
+        <div className="title">
           <span className="hidden">{hiddenTitleForAria}</span>
           <span aria-hidden="true">
             ID: {id} {renderChildrenCount}
