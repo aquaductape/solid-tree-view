@@ -27,6 +27,12 @@ code {
     monospace;
 }
 
+.hidden {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .logo {
   position: fixed;
   top: 10px;

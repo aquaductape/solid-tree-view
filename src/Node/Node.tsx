@@ -44,7 +44,7 @@ const Node = ({ id, parentId }: NodeProps) => {
     } `;
   };
 
-  const ariaTitleLabel = () => {
+  const hiddenTitleForAria = () => {
     const label = `ID ${id}`;
     const children = getAllChildren();
 
@@ -58,8 +58,11 @@ const Node = ({ id, parentId }: NodeProps) => {
   return (
     <section className="node">
       <div className="title-bar">
-        <div className="title" aria-label={ariaTitleLabel()}>
-          ID: {id} {renderChildrenCount}
+        <div className="title" aria-label={hiddenTitleForAria()}>
+          <span className="hidden">{hiddenTitleForAria}</span>
+          <span aria-hidden="true">
+            ID: {id} {renderChildrenCount}
+          </span>
         </div>
         {typeof parentId !== "undefined" && (
           <button
