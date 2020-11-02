@@ -45,8 +45,8 @@ const Node = ({ id, parentId }: NodeProps) => {
   };
 
   return (
-    <div className="node">
-      <nav className="navbar">
+    <section className="node">
+      <div className="title-bar">
         <div className="title">
           ID: {id} {renderChildrenCount()}
         </div>
@@ -59,8 +59,8 @@ const Node = ({ id, parentId }: NodeProps) => {
             x
           </button>
         )}
-      </nav>
-      <section className="content">
+      </div>
+      <div className="content">
         Counter: {state.tree[id].counter}{" "}
         <button
           className="btn btn-counter"
@@ -76,11 +76,15 @@ const Node = ({ id, parentId }: NodeProps) => {
         >
           -
         </button>{" "}
-        <div className="node-children">
+        <ul className="node-children">
           <For each={state.tree[id].childIds}>
-            {(childId) => <Node id={childId} parentId={id} />}
+            {(childId) => (
+              <li className="node-child">
+                <Node id={childId} parentId={id} />
+              </li>
+            )}
           </For>
-        </div>
+        </ul>
         <button
           className="btn btn-add-child"
           onClick={handleAddChildClick}
@@ -88,8 +92,8 @@ const Node = ({ id, parentId }: NodeProps) => {
         >
           Add Child
         </button>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

@@ -53,16 +53,22 @@ code {
   width: 200px;
   margin: 5px 0;
 }
+
 .node-children {
   padding-left: 5px;
+  margin: 0;
 }
 
-.navbar,
+.node-child {
+  list-style-type: none;
+}
+
+.title-bar,
 .content {
   border: 2px solid #242f41;
 }
 
-.navbar {
+.title-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -80,6 +86,8 @@ code {
 }
 
 .title {
+  font-size: inherit;
+  font-weight: inherit;
   margin: 0 5px;
 }
 
