@@ -44,11 +44,22 @@ const Node = ({ id, parentId }: NodeProps) => {
     } `;
   };
 
+  const ariaTitleLabel = () => {
+    const label = `ID ${id}`;
+    const children = getAllChildren();
+
+    if (!children) return label;
+
+    return `${label}. Contains ${
+      children === 1 ? "one child" : `${children} children`
+    }`;
+  };
+
   return (
     <section className="node">
       <div className="title-bar">
-        <div className="title">
-          ID: {id} {renderChildrenCount()}
+        <div className="title" aria-label={ariaTitleLabel()}>
+          ID: {id} {renderChildrenCount}
         </div>
         {typeof parentId !== "undefined" && (
           <button
