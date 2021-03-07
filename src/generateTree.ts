@@ -7,7 +7,7 @@ export type TTree = {
 };
 
 export default function generateTree() {
-  const idCount = 50;
+  const idCount = 300;
   const tree: TTree = {
     0: {
       id: 0,
