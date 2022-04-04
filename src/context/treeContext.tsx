@@ -62,23 +62,21 @@ export function TreeProvider(props: TreeState & { children: any }) {
         );
       },
       deleteNode({ parentId, childId }) {
-        batch(() => {
-          setState(
-            produce((s) => {
-              // remove child
-              const parentNode = s.tree[parentId];
-              const foundChildIdx = parentNode.childIds.find(
-                (id) => id === childId
-              )!;
-              parentNode.childIds.splice(foundChildIdx, 1);
+        setState(
+          produce((s) => {
+            // remove child
+            const parentNode = s.tree[parentId];
+            const foundChildIdx = parentNode.childIds.findIndex(
+              (id) => id === childId
+            )!;
+            parentNode.childIds.splice(foundChildIdx, 1);
 
-              // delete Node and all it's descendants
-              const ids = getAllDescendants(s.tree, childId);
+            // delete Node and all it's descendants
+            const ids = getAllDescendants(s.tree, childId);
 
-              deleteMany(s.tree, ids);
-            })
-          );
-        });
+            deleteMany(s.tree, ids);
+          })
+        );
       },
     },
   ];
