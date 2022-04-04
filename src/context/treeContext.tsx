@@ -1,6 +1,7 @@
-import { createState, createContext, ComponentProps, batch } from "solid-js";
+import { createContext, ComponentProps, batch } from "solid-js";
+import { createStore, produce } from "solid-js/store";
 import { TTree } from "../generateTree";
-import { deleteMany, getAllDescendants } from "../Node/utils";
+import { getAllDescendants } from "../components/Node/utils";
 
 type TreeState = {
   tree: TTree;
@@ -23,13 +24,17 @@ type TTreeContext = [
   }
 ];
 
+const deleteMany = (tree: TTree, ids: number[]) => {
+  ids.forEach((id) => delete tree[id]);
+};
+
 export const TreeContext = createContext<TTreeContext>([
   { tree: {}, nextId: 0 },
   {} as any,
 ]);
 
 export function TreeProvider(props: TreeState & { children: any }) {
-  const [state, setState] = createState({
+  const [state, setState] = createStore({
     tree: props.tree,
     nextId: props.nextId,
   });
@@ -38,13 +43,6 @@ export function TreeProvider(props: TreeState & { children: any }) {
     state,
     {
       increment(id) {
-        /**
-         * this also works at runtime but couldn't find ts solution
-         *
-         * const path = ["tree", id, "counter"];
-         * // @ts-ignore
-         * setState(...path, (value) => value + 1);
-         */
         setState("tree", id, "counter", (value) => value + 1);
       },
       decrement(id) {
@@ -53,36 +51,33 @@ export function TreeProvider(props: TreeState & { children: any }) {
       createNode(id) {
         const newId = state.nextId + 1;
 
-        batch(() => {
-          // create Node
-          setState("nextId", () => newId);
-          setState("tree", (tree) => {
-            tree[newId] = { id: newId, childIds: [], counter: 0 };
-            return tree;
-          });
-
-          // add Child
-          setState("tree", id, "childIds", (ids) => {
-            ids.push(newId);
-            return [...ids];
-          });
-        });
+        setState(
+          produce((s) => {
+            // create Node
+            s.nextId = newId;
+            s.tree[newId] = { id: newId, childIds: [], counter: 0 };
+            // add Child
+            s.tree[id].childIds.push(newId);
+          })
+        );
       },
       deleteNode({ parentId, childId }) {
         batch(() => {
-          // remove child
-          setState("tree", parentId!, "childIds", (ids) =>
-            ids.filter((id) => id !== childId)
+          setState(
+            produce((s) => {
+              // remove child
+              const parentNode = s.tree[parentId];
+              const foundChildIdx = parentNode.childIds.find(
+                (id) => id === childId
+              )!;
+              parentNode.childIds.splice(foundChildIdx, 1);
+
+              // delete Node and all it's descendants
+              const ids = getAllDescendants(s.tree, childId);
+
+              deleteMany(s.tree, ids);
+            })
           );
-
-          // delete Node and all it's descendants
-          setState("tree", (tree) => {
-            const ids = getAllDescendants(tree, childId);
-
-            deleteMany(tree, ids);
-
-            return tree;
-          });
         });
       },
     },

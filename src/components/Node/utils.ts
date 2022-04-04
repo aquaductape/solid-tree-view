@@ -1,4 +1,4 @@
-import { TTree } from "../generateTree";
+import { TTree } from "../../generateTree";
 
 export const getAllDescendants = (tree: TTree, id: number) => {
   const descendants = [id];
@@ -11,8 +11,4 @@ export const getAllDescendants = (tree: TTree, id: number) => {
 
   run(id);
   return descendants;
-};
-
-export const deleteMany = (tree: TTree, ids: number[]) => {
-  ids.forEach((id) => delete tree[id]);
 };

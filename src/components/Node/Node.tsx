@@ -1,5 +1,5 @@
 import { createMemo, For, useContext } from "solid-js";
-import { TreeContext } from "../context/treeContext";
+import { TreeContext } from "../../context/treeContext";
 import { getAllDescendants } from "./utils";
 
 type NodeProps = {
@@ -8,9 +8,8 @@ type NodeProps = {
 };
 
 const Node = ({ id, parentId }: NodeProps) => {
-  const [state, { createNode, decrement, deleteNode, increment }] = useContext(
-    TreeContext
-  );
+  const [state, { createNode, decrement, deleteNode, increment }] =
+    useContext(TreeContext);
   const getAllChildren = createMemo(
     () => getAllDescendants(state.tree, id).length - 1
   );

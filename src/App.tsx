@@ -1,7 +1,7 @@
-import { createState } from "solid-js";
 import { TreeProvider } from "./context/treeContext";
-import generateTree from "./generateTree";
-import Node from "./Node/Node";
+import generateTree from "../src/generateTree";
+import Node from "./components/Node/Node";
+import SolidJSImg from "./assets/solid-logo.png";
 
 function App() {
   const { tree, idCount } = generateTree();
@@ -10,7 +10,7 @@ function App() {
     <div class="App">
       <div className="logo">
         <a href="https://github.com/ryansolid/solid" target="blank">
-          <img src="/solid-logo.png" alt="Solid JS" />
+          <img src={SolidJSImg} alt="Solid JS" />
         </a>
       </div>
       <TreeProvider tree={tree} nextId={idCount}>
