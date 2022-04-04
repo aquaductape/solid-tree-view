@@ -9,7 +9,7 @@ function App() {
   return (
     <div class="App">
       <div className="logo">
-        <a href="https://github.com/ryansolid/solid" target="blank">
+        <a href="https://github.com/solidjs/solid" target="blank">
           <img src={SolidJSImg} alt="Solid JS" />
         </a>
       </div>
