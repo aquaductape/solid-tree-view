@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div class="App">
-      <div className="logo">
+      <div class="logo">
         <a href="https://github.com/solidjs/solid" target="blank">
           <img src={SolidJSImg} alt="Solid JS" />
         </a>

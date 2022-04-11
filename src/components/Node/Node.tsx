@@ -28,7 +28,7 @@ const Node = ({ id, parentId }: NodeProps) => {
     const children = getAllChildren();
 
     return children ? (
-      <span className="title-children-amount"> | children: {children}</span>
+      <span class="title-children-amount"> | children: {children}</span>
     ) : null;
   };
 
@@ -55,17 +55,17 @@ const Node = ({ id, parentId }: NodeProps) => {
   };
 
   return (
-    <section className="node">
-      <div className="title-bar">
-        <div className="title">
-          <span className="hidden">{hiddenTitleForAria}</span>
+    <section class="node">
+      <div class="title-bar">
+        <div class="title">
+          <span class="hidden">{hiddenTitleForAria}</span>
           <span aria-hidden="true">
             ID: {id} {renderChildrenCount}
           </span>
         </div>
         {typeof parentId !== "undefined" && (
           <button
-            className="btn btn-remove"
+            class="btn btn-remove"
             onClick={handleRemoveClick}
             aria-label={ariaDeleteLabel()}
           >
@@ -73,33 +73,33 @@ const Node = ({ id, parentId }: NodeProps) => {
           </button>
         )}
       </div>
-      <div className="content">
+      <div class="content">
         Counter: {state.tree[id].counter}{" "}
         <button
-          className="btn btn-counter"
+          class="btn btn-counter"
           onClick={handleIncrementClick}
           aria-label={`increment counter of node ID of ${id}`}
         >
           +
         </button>{" "}
         <button
-          className="btn btn-counter"
+          class="btn btn-counter"
           onClick={handleDecrementClick}
           aria-label={`decrement counter of node ID of ${id}`}
         >
           -
         </button>{" "}
-        <ul className="node-children">
+        <ul class="node-children">
           <For each={state.tree[id].childIds}>
             {(childId) => (
-              <li className="node-child">
+              <li class="node-child">
                 <Node id={childId} parentId={id} />
               </li>
             )}
           </For>
         </ul>
         <button
-          className="btn btn-add-child"
+          class="btn btn-add-child"
           onClick={handleAddChildClick}
           aria-label={`add child to node ID of ${id}`}
         >
