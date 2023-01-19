@@ -1,7 +1,16 @@
 /* @refresh reload */
-import { render } from 'solid-js/web';
+import { render } from "solid-js/web";
 
-import './index.css';
-import App from './App';
+import "./index.css";
+import App from "./App";
+// @ts-ignore
+import Rewind from "solid-rewind";
 
-render(() => <App />, document.getElementById('root') as HTMLElement);
+render(
+  () => (
+    <Rewind>
+      <App />
+    </Rewind>
+  ),
+  document.getElementById("root") as HTMLElement
+);

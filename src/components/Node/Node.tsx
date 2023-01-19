@@ -1,4 +1,4 @@
-import { createMemo, For, useContext } from "solid-js";
+import { createMemo, For, onCleanup, useContext } from "solid-js";
 import { TreeContext } from "../../context/treeContext";
 import { getAllDescendants } from "./utils";
 
@@ -54,6 +54,10 @@ const Node = ({ id, parentId }: NodeProps) => {
     }`;
   };
 
+  onCleanup(() => {
+    console.log("cleanup!", id);
+  });
+
   return (
     <section class="node">
       <div class="title-bar">
@@ -74,7 +78,7 @@ const Node = ({ id, parentId }: NodeProps) => {
         )}
       </div>
       <div class="content">
-        Counter: {state.tree[id].counter}{" "}
+        Counter: {state.tree[id]?.counter}{" "}
         <button
           class="btn btn-counter"
           onClick={handleIncrementClick}
@@ -90,7 +94,7 @@ const Node = ({ id, parentId }: NodeProps) => {
           -
         </button>{" "}
         <ul class="node-children">
-          <For each={state.tree[id].childIds}>
+          <For each={state.tree[id]?.childIds}>
             {(childId) => (
               <li class="node-child">
                 <Node id={childId} parentId={id} />
