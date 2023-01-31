@@ -10,7 +10,7 @@ type NodeProps = {
 const Node = ({ id, parentId }: NodeProps) => {
   const [state, { createNode, decrement, deleteNode, increment }] =
     useContext(TreeContext);
-  const getAllChildren = createMemo(
+  const getAllChildrenCount = createMemo(
     () => getAllDescendants(state.tree, id).length - 1
   );
 
@@ -25,32 +25,32 @@ const Node = ({ id, parentId }: NodeProps) => {
   };
 
   const renderChildrenCount = () => {
-    const children = getAllChildren();
+    const childrenCount = getAllChildrenCount();
 
-    return children ? (
-      <span class="title-children-amount"> | children: {children}</span>
+    return childrenCount ? (
+      <span class="title-children-amount"> | children: {childrenCount}</span>
     ) : null;
   };
 
   const ariaDeleteLabel = () => {
     const label = `remove node of ID ${id}`;
-    const children = getAllChildren();
+    const childrenCount = getAllChildrenCount();
 
-    if (!children) return label;
+    if (!childrenCount) return label;
 
     return `${label} and its ${
-      children === 1 ? "one child" : `${children} children`
+      childrenCount === 1 ? "one child" : `${childrenCount} children`
     } `;
   };
 
   const hiddenTitleForAria = () => {
     const label = `ID ${id}`;
-    const children = getAllChildren();
+    const childrenCount = getAllChildrenCount();
 
-    if (!children) return label;
+    if (!childrenCount) return label;
 
     return `${label}. Contains ${
-      children === 1 ? "one child" : `${children} children`
+      childrenCount === 1 ? "one child" : `${childrenCount} children`
     }`;
   };
 
